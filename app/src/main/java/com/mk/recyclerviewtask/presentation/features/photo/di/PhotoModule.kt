@@ -8,7 +8,6 @@ import com.mk.recyclerviewtask.domain.photo.PhotoInteractorImpl
 import dagger.Binds
 import dagger.Module
 
-
 @Module(includes = [PhotoModule.Binders::class])
 object PhotoModule {
 
@@ -22,6 +21,5 @@ object PhotoModule {
         @Binds
         @PhotoScope
         fun bindPhotoInteractor(impl: PhotoInteractorImpl): PhotoInteractor
-
     }
 }

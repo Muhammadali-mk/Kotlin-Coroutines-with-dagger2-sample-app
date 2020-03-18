@@ -1,6 +1,6 @@
 package com.mk.recyclerviewtask.presentation.features.photo
 
-import com.mk.recyclerviewtask.data.model.Photo
+import com.mk.recyclerviewtask.data.model.photo.Photo
 import moxy.MvpView
 
 interface PhotoView : MvpView {

@@ -23,13 +23,10 @@ class PostFragment : MvpAppCompatFragment(R.layout.fragment_post), PostView {
 
     private lateinit var binding: FragmentPostBinding
 
-    private val adapter: PostAdapter =
-        PostAdapter {
-            if (findNavController().currentDestination?.id == R.id.postFragment) {
-                findNavController()
-                    .navigate(PostFragmentDirections.actionPostToDetails().setPostId(it.userId))
-            }
-        }
+    private val adapter: PostAdapter = PostAdapter {
+        findNavController()
+            .navigate(PostFragmentDirections.actionPostToDetails().setPostId(it.userId))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         PostComponent.create(ApplicationComponent.get()).inject(this)
@@ -37,11 +34,9 @@ class PostFragment : MvpAppCompatFragment(R.layout.fragment_post), PostView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding = FragmentPostBinding.bind(view).apply {
             recyclerView.adapter = adapter
         }
-        presenter.getPosts()
     }
 
     override fun displayPosts(post: List<Post>) {

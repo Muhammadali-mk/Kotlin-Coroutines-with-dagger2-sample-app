@@ -1,4 +1,4 @@
-package com.mk.recyclerviewtask.data.model
+package com.mk.recyclerviewtask.data.model.photo
 
 import kotlinx.serialization.Serializable
 

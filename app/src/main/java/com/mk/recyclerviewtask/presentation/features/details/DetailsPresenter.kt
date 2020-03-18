@@ -1,6 +1,6 @@
 package com.mk.recyclerviewtask.presentation.features.details
 
-import com.mk.recyclerviewtask.domain.post.PostInteractor
+import com.mk.recyclerviewtask.domain.post.details.DetailsInteractor
 import com.mk.recyclerviewtask.utils.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -10,7 +10,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 class DetailsPresenter @Inject constructor(
-    private val postInteractor: PostInteractor
+    private val detailsInteractor: DetailsInteractor
 ) : MvpPresenter<DetailsView>() {
     var id: Int by Delegates.notNull()
 
@@ -20,7 +20,7 @@ class DetailsPresenter @Inject constructor(
     @Suppress("EXPERIMENTAL_API_USAGE")
     fun getPostById() {
         presenterScope.launch {
-            postInteractor.getPostById(id)
+            detailsInteractor.getPostById(id)
                 .onStart { viewState.onLoadingPost() }
                 .collect(
                     onStart = { viewState.onLoadingPost() },

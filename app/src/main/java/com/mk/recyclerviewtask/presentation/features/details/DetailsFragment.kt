@@ -32,7 +32,6 @@ class DetailsFragment : MvpAppCompatFragment(R.layout.fragment_details), Details
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
     }
 

@@ -1,7 +1,7 @@
 package com.mk.recyclerviewtask.data.repository.photo
 
 import com.mk.recyclerviewtask.data.datasource.rest.WebService
-import com.mk.recyclerviewtask.data.model.Photo
+import com.mk.recyclerviewtask.data.model.photo.Photo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

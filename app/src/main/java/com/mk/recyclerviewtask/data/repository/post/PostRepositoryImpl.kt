@@ -22,17 +22,6 @@ class PostRepositoryImpl @Inject constructor(
             .onEach { postEntityDao.insert(it.mapToEntities()) }
             .map { it.map() }
     }
-
-    @FlowPreview
-    override fun getPostById(id: Int): Flow<Post> {
-        return flow { emit(postEntityDao.getPostById(id)) }
-            .flatMapConcat { it ->
-                return@flatMapConcat if (it != null) flowOf(it.map())
-                else flow { emit(webService.getPostById(id)) }
-                    .onEach { postEntityDao.insert(it.mapToEntity()) }
-                    .map { it.map() }
-            }
-    }
 }
 
 

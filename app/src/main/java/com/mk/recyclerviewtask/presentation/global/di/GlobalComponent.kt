@@ -11,7 +11,6 @@ import dagger.Component
 interface GlobalComponent {
 
     fun inject(activity: MainActivity)
-  //  fun plusPhotoSubComponent():PhotoSubComponent
 
     companion object {
         @Volatile

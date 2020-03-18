@@ -9,9 +9,7 @@ class RestProvider {
 
     fun getWebService(): WebService =
         Retrofit.Builder()
-            .addConverterFactory(
-                Json.asConverterFactory("application/json".toMediaType())
-            )
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .baseUrl(BASE_URL)
             .build()
             .create(WebService::class.java)

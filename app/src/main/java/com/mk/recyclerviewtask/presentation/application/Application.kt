@@ -10,5 +10,4 @@ class Application : Application() {
         super.onCreate()
         ApplicationComponent.create(this)
     }
-
 }

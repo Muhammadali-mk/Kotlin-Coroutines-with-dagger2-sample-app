@@ -1,6 +1,6 @@
 package com.mk.recyclerviewtask.domain.photo
 
-import com.mk.recyclerviewtask.data.model.Photo
+import com.mk.recyclerviewtask.data.model.photo.Photo
 import com.mk.recyclerviewtask.data.repository.photo.PhotoRepository
 import com.mk.recyclerviewtask.utils.flatMapResult
 import kotlinx.coroutines.Dispatchers

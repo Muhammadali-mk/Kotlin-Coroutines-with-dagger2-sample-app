@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
 
-    fun database(): PostDatabase
+    fun postDatabase(): PostDatabase
 
     fun postEntityDao(): PostEntityDao
 

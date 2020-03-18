@@ -3,7 +3,7 @@ package com.mk.recyclerviewtask.presentation.features.photo
 import android.os.Bundle
 import android.view.View
 import com.mk.recyclerviewtask.R
-import com.mk.recyclerviewtask.data.model.Photo
+import com.mk.recyclerviewtask.data.model.photo.Photo
 import com.mk.recyclerviewtask.databinding.FragmentPhotoBinding
 import com.mk.recyclerviewtask.presentation.application.di.ApplicationComponent
 import com.mk.recyclerviewtask.presentation.features.photo.adapter.PhotoAdapter
@@ -18,7 +18,6 @@ class PhotoFragment : MvpAppCompatFragment(R.layout.fragment_photo), PhotoView {
 
     @Inject
     lateinit var presenterProvider: Provider<PhotoPresenter>
-
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     lateinit var binding: FragmentPhotoBinding
@@ -26,9 +25,7 @@ class PhotoFragment : MvpAppCompatFragment(R.layout.fragment_photo), PhotoView {
     private val adapter: PhotoAdapter = PhotoAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        PhotoComponent.create(
-            ApplicationComponent.get()
-        ).inject(this)
+        PhotoComponent.create(ApplicationComponent.get()).inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -37,7 +34,6 @@ class PhotoFragment : MvpAppCompatFragment(R.layout.fragment_photo), PhotoView {
         binding = FragmentPhotoBinding.bind(view).apply {
             recyclerView.adapter = adapter
         }
-        presenter.getPhotos()
     }
 
     override fun displayPhotos(photo: List<Photo>) {

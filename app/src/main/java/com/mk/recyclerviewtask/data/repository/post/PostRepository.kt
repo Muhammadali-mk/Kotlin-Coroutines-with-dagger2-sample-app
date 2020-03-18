@@ -6,6 +6,4 @@ import kotlinx.coroutines.flow.Flow
 interface PostRepository {
 
     fun getPosts(): Flow<List<Post>>
-
-    fun getPostById(id: Int): Flow<Post>
 }

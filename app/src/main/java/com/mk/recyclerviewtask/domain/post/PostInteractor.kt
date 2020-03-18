@@ -6,6 +6,4 @@ import kotlinx.coroutines.flow.Flow
 interface PostInteractor {
 
     fun getPosts(): Flow<Result<List<Post>>>
-
-    fun getPostById(id: Int): Flow<Result<Post>>
 }

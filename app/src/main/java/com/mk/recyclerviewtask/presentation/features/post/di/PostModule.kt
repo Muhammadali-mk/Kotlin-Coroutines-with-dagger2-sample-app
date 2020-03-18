@@ -1,7 +1,5 @@
 package com.mk.recyclerviewtask.presentation.features.post.di
 
-import com.mk.recyclerviewtask.data.datasource.database.PostDatabase
-import com.mk.recyclerviewtask.data.datasource.rest.WebService
 import com.mk.recyclerviewtask.data.repository.post.PostRepository
 import com.mk.recyclerviewtask.data.repository.post.PostRepositoryImpl
 import com.mk.recyclerviewtask.domain.post.PostInteractor

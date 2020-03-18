@@ -1,7 +1,6 @@
 package com.mk.recyclerviewtask.data.datasource.rest
 
-import com.mk.recyclerviewtask.data.model.Photo
-import com.mk.recyclerviewtask.data.model.post.Post
+import com.mk.recyclerviewtask.data.model.photo.Photo
 import com.mk.recyclerviewtask.data.model.post.PostResponse
 import retrofit2.http.GET
 import retrofit2.http.Path

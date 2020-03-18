@@ -10,7 +10,6 @@ import dagger.Component
     dependencies = [ApplicationComponent::class],
     modules = [PhotoModule::class]
 )
-
 interface PhotoComponent {
 
     fun inject(fragment: PhotoFragment)
@@ -23,5 +22,4 @@ interface PhotoComponent {
                 .applicationComponent(applicationComponent)
                 .build()
     }
-
 }

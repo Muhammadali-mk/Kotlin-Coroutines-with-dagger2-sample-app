@@ -42,7 +42,6 @@ object ApplicationModule {
         fun provideWebService(restProvider: RestProvider): WebService {
             return restProvider.getWebService()
         }
-
     }
 }
 

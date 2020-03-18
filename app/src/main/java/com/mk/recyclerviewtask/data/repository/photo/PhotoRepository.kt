@@ -1,6 +1,6 @@
 package com.mk.recyclerviewtask.data.repository.photo
 
-import com.mk.recyclerviewtask.data.model.Photo
+import com.mk.recyclerviewtask.data.model.photo.Photo
 import kotlinx.coroutines.flow.Flow
 
 interface PhotoRepository {

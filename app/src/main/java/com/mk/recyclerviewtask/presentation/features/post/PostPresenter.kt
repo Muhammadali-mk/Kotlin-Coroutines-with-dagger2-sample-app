@@ -13,7 +13,8 @@ class PostPresenter @Inject constructor(
     private val interactor: PostInteractor
 ) : MvpPresenter<PostView>() {
 
-    override fun onFirstViewAttach() = getPosts()
+    override fun onFirstViewAttach() =
+        getPosts()
 
     fun getPosts() {
         presenterScope.launch {
