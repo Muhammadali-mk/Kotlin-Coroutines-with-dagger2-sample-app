@@ -7,7 +7,5 @@ interface PostInteractor {
 
     fun getPosts(): Flow<Result<List<Post>>>
 
-    fun getPostById(id: Int): Flow<Post>
-
-
+    fun getPostById(id: Int): Flow<Result<Post>>
 }

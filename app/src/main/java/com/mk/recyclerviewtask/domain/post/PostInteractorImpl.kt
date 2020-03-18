@@ -21,7 +21,10 @@ class PostInteractorImpl @Inject constructor(
             .flowOn(Dispatchers.IO)
     }
 
-    override fun getPostById(id: Int): Flow<Post> {
+    @ExperimentalCoroutinesApi
+    override fun getPostById(id: Int): Flow<Result<Post>> {
         return repository.getPostById(id)
+            .flatMapResult()
+            .flowOn(Dispatchers.IO)
     }
 }

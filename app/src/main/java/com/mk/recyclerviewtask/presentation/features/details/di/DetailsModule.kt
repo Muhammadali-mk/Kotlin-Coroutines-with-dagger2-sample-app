@@ -1,7 +1,5 @@
-package com.mk.recyclerviewtask.presentation.features.post.di
+package com.mk.recyclerviewtask.presentation.features.details.di
 
-import com.mk.recyclerviewtask.data.datasource.database.PostDatabase
-import com.mk.recyclerviewtask.data.datasource.rest.WebService
 import com.mk.recyclerviewtask.data.repository.post.PostRepository
 import com.mk.recyclerviewtask.data.repository.post.PostRepositoryImpl
 import com.mk.recyclerviewtask.domain.post.PostInteractor
@@ -9,18 +7,18 @@ import com.mk.recyclerviewtask.domain.post.PostInteractorImpl
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [PostModule.Binders::class])
-object PostModule {
+@Module(includes = [DetailsModule.Binders::class])
+object DetailsModule {
 
     @Module
     interface Binders {
 
         @Binds
-        @PostScope
+        @DetailsScope
         fun bindPostRepository(impl: PostRepositoryImpl): PostRepository
 
         @Binds
-        @PostScope
+        @DetailsScope
         fun bindPostInteractor(impl: PostInteractorImpl): PostInteractor
     }
 }

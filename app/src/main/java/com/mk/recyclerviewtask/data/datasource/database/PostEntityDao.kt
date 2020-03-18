@@ -17,4 +17,7 @@ interface PostEntityDao {
 
     @Query("SELECT * FROM posts")
     fun getPosts(): List<PostEntity>
+
+    @Query("SELECT * FROM posts WHERE post_user_id = :id")
+    fun getPostById(id: Int): PostEntity?
 }

@@ -1,8 +1,10 @@
 package com.mk.recyclerviewtask.presentation.application.di
 
 import com.mk.recyclerviewtask.data.datasource.database.PostDatabase
+import com.mk.recyclerviewtask.data.datasource.database.PostEntityDao
 import com.mk.recyclerviewtask.data.datasource.rest.WebService
 import com.mk.recyclerviewtask.presentation.application.Application
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,36 +12,30 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
 
-    fun injectApp(app: Application)
+    fun database(): PostDatabase
 
-    fun provideWebService(): WebService
+    fun postEntityDao(): PostEntityDao
 
-    fun provideDatabase(): PostDatabase
+    fun webService(): WebService
 
-    /*  @Component.Builder
-      interface Builder {
+    fun inject(app: Application)
 
-          @BindsInstance
-          fun application(app: Application): Builder
-
-          fun build(): ApplicationComponent
-      }*/
+    @Component.Factory
+    interface Factory {
+        fun create(
+            @BindsInstance application: Application
+        ): ApplicationComponent
+    }
 
     companion object {
-        @Volatile
         private var component: ApplicationComponent? = null
 
-        fun createOrGet(): ApplicationComponent {
-            return if (component != null) checkNotNull(component)
-            else synchronized(this) {
-                if (component != null) return checkNotNull(component)
-                else component =
-                    DaggerApplicationComponent
-                        .builder()
-                        .fac
-                        .build()
-                return@synchronized checkNotNull(component)
-            }
+        fun create(application: Application): ApplicationComponent {
+            component = DaggerApplicationComponent.factory().create(application)
+            return checkNotNull(component)
         }
+
+        fun get(): ApplicationComponent =
+            checkNotNull(component)
     }
 }

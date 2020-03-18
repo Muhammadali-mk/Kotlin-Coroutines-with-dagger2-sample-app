@@ -31,7 +31,7 @@ class PhotoFragment : MvpAppCompatFragment(R.layout.fragment_photo), PhotoView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         PhotoComponent.create(
-            ApplicationComponent.createOrGet()
+            ApplicationComponent.get()
         ).inject(this)
         super.onCreate(savedInstanceState)
     }

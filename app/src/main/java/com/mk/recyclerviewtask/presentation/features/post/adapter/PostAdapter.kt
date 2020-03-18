@@ -1,50 +1,47 @@
 package com.mk.recyclerviewtask.presentation.features.post.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mk.recyclerviewtask.data.model.post.Post
 import com.mk.recyclerviewtask.databinding.RowPostItemLayoutBinding
 
-class PostAdapter(var postList: List<Post>, private val cListener: OnItemClickListener) :
+class PostAdapter(private val listener: (Post) -> Unit) :
     RecyclerView.Adapter<PostAdapter.PostHolder>() {
-
-    lateinit var binding: RowPostItemLayoutBinding
-
-    interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int)
-    }
+    private val list: MutableList<Post> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
-        val view = RowPostItemLayoutBinding
-            .inflate(LayoutInflater.from(parent.context), parent, false)
+        val view: RowPostItemLayoutBinding =
+            RowPostItemLayoutBinding
+                .inflate(LayoutInflater.from(parent.context), parent, false)
         return PostHolder(view)
     }
 
+    fun setPosts(collection: Collection<Post>) {
+        list.apply { clear(); addAll(collection) }
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return postList.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        holder.bindPost(postList, position, cListener)
-
+        holder.bind(list[position])
     }
 
-    class PostHolder(itemView: RowPostItemLayoutBinding) : RecyclerView.ViewHolder(itemView.root) {
-        var userId = itemView.tvUserId
-        var id = itemView.tvId
-        var title = itemView.tvTitle
-        var body = itemView.tvBody
+    inner class PostHolder(
+        private val binding: RowPostItemLayoutBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-
-        fun bindPost(postList: List<Post>, position: Int, cListener: OnItemClickListener) {
-            userId.text = postList.get(position).userId.toString()
-            id.text = postList.get(position).id.toString()
-            title.text = postList.get(position).title
-            body.text = postList.get(position).body
-            cListener.onItemClick(itemView, position)
+        fun bind(post: Post) {
+            binding.apply {
+                tvUserId.text = post.userId.toString()
+                tvId.text = post.id.toString()
+                tvTitle.text = post.title
+                tvBody.text = post.body
+                root.setOnClickListener { listener(post) }
+            }
         }
     }
-
 }

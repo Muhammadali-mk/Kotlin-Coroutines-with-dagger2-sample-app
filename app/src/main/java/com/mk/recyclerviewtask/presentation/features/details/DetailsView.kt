@@ -5,5 +5,9 @@ import moxy.MvpView
 
 interface DetailsView : MvpView {
 
-    fun onPostGet(post: Post)
+    fun onLoadingPost()
+
+    fun onSuccessPost(post: Post)
+
+    fun onFailurePost(throwable: Throwable)
 }

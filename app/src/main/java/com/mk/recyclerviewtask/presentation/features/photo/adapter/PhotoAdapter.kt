@@ -26,7 +26,7 @@ class PhotoAdapter(var photoList: List<Photo>) : RecyclerView.Adapter<PhotoAdapt
         holder.bindPost(photoList, position)
     }
 
-    class PhotoHolder(val binding: RowPhotoItemLayoutBinding) :
+    class PhotoHolder(private val binding: RowPhotoItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindPost(postList: List<Photo>, position: Int) {
             with(binding) {

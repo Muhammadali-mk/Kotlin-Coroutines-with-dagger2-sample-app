@@ -2,8 +2,8 @@ package com.mk.recyclerviewtask.presentation.features.post
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.mk.recyclerviewtask.R
 import com.mk.recyclerviewtask.data.model.post.Post
 import com.mk.recyclerviewtask.databinding.FragmentPostBinding
@@ -11,53 +11,41 @@ import com.mk.recyclerviewtask.presentation.application.di.ApplicationComponent
 import com.mk.recyclerviewtask.presentation.features.post.adapter.PostAdapter
 import com.mk.recyclerviewtask.presentation.features.post.di.PostComponent
 import moxy.MvpAppCompatFragment
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
+import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
-class PostFragment : MvpAppCompatFragment(R.layout.fragment_post), PostView,
-    PostAdapter.OnItemClickListener {
-    /* @Inject
-     @InjectPresenter
-     lateinit var presenterProvider: Provider<PostPresenter>
+class PostFragment : MvpAppCompatFragment(R.layout.fragment_post), PostView {
 
-     private val presenter by moxyPresenter { presenterProvider.get() }*/
     @Inject
-    @InjectPresenter
-    lateinit var presenter: PostPresenter
+    lateinit var presenterProvider: Provider<PostPresenter>
 
-    lateinit var binding: FragmentPostBinding
+    private val presenter by moxyPresenter { presenterProvider.get() }
 
-    @ProvidePresenter
-    fun provideFlowPresenter(): PostPresenter = presenter
+    private lateinit var binding: FragmentPostBinding
 
-    private lateinit var recyclerView: RecyclerView
+    private val adapter: PostAdapter =
+        PostAdapter {
+            if (findNavController().currentDestination?.id == R.id.postFragment) {
+                findNavController()
+                    .navigate(PostFragmentDirections.actionPostToDetails().setPostId(it.userId))
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        PostComponent.create().inject(this)
+        PostComponent.create(ApplicationComponent.get()).inject(this)
         super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentPostBinding.bind(view)
+        binding = FragmentPostBinding.bind(view).apply {
+            recyclerView.adapter = adapter
+        }
         presenter.getPosts()
-        recyclerView = binding.recyclerView
     }
 
     override fun displayPosts(post: List<Post>) {
-        setUpsRecyclerView(post)
-    }
-
-    private fun setUpsRecyclerView(postlist: List<Post>) {
-        recyclerView.adapter = PostAdapter(postlist, this)
-    }
-
-    override fun onItemClick(view: View, position: Int) {
-        view.findNavController()
-            .navigate(
-                PostFragmentDirections.actionPostToDetails()
-                    .setPostId(position)
-            )
+        adapter.setPosts(post)
     }
 }
