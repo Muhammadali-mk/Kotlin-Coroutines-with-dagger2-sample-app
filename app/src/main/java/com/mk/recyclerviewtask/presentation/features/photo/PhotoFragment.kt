@@ -2,32 +2,28 @@ package com.mk.recyclerviewtask.presentation.features.photo
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.mk.recyclerviewtask.R
 import com.mk.recyclerviewtask.data.model.Photo
+import com.mk.recyclerviewtask.databinding.FragmentPhotoBinding
 import com.mk.recyclerviewtask.presentation.application.di.ApplicationComponent
 import com.mk.recyclerviewtask.presentation.features.photo.adapter.PhotoAdapter
 import com.mk.recyclerviewtask.presentation.features.photo.di.PhotoComponent
 import moxy.MvpAppCompatFragment
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
+import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 
 class PhotoFragment : MvpAppCompatFragment(R.layout.fragment_photo), PhotoView {
 
     @Inject
-    @InjectPresenter
-    lateinit var presenter: PhotoPresenter
+    lateinit var presenterProvider: Provider<PhotoPresenter>
 
-    @ProvidePresenter
-    fun providePhotoPresenter(): PhotoPresenter = presenter
+    private val presenter by moxyPresenter { presenterProvider.get() }
 
-    lateinit var recyclerView: RecyclerView
+    lateinit var binding: FragmentPhotoBinding
 
-    override fun displayPhotos(photo: List<Photo>) {
-        setUpRecyclerView(photo)
-    }
+    private val adapter: PhotoAdapter = PhotoAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         PhotoComponent.create(
@@ -38,11 +34,22 @@ class PhotoFragment : MvpAppCompatFragment(R.layout.fragment_photo), PhotoView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentPhotoBinding.bind(view).apply {
+            recyclerView.adapter = adapter
+        }
         presenter.getPhotos()
-        recyclerView = view.findViewById(R.id.recycler_view)
     }
 
-    private fun setUpRecyclerView(photoList: List<Photo>) {
-        recyclerView.adapter = PhotoAdapter(photoList)
+    override fun displayPhotos(photo: List<Photo>) {
+        binding.progressBar.visibility = View.GONE
+        adapter.setPhotos(photo)
+    }
+
+    override fun onLoadingPhotos() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun onFailurePhotos(throwable: Throwable) {
+
     }
 }

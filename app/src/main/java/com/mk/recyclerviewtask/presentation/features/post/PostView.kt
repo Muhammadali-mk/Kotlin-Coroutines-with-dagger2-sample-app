@@ -6,4 +6,8 @@ import moxy.MvpView
 interface PostView : MvpView {
 
     fun displayPosts(post: List<Post>)
+
+    fun onFailurePost(throwable: Throwable)
+
+    fun onLoadingPost()
 }

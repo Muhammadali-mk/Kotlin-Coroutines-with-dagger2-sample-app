@@ -19,9 +19,9 @@ class PostPresenter @Inject constructor(
         presenterScope.launch {
             interactor.getPosts()
                 .collect(
-                    onStart = {},
+                    onStart = {viewState.onLoadingPost()},
                     onSuccess = { viewState.displayPosts(it) },
-                    onFailure = {}
+                    onFailure = {viewState.onFailurePost(it)}
                 )
         }
     }

@@ -21,9 +21,9 @@ class PhotoPresenter @Inject constructor(
         presenterScope.launch {
             interactor.getPhotos()
                 .collect(
-                    onStart = {},
+                    onStart = { viewState.onLoadingPhotos() },
                     onSuccess = { viewState.displayPhotos(it) },
-                    onFailure = {}
+                    onFailure = { viewState.onFailurePhotos(it) }
                 )
         }
     }

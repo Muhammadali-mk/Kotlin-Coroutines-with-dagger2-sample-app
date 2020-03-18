@@ -2,7 +2,6 @@ package com.mk.recyclerviewtask.presentation.features.post
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.mk.recyclerviewtask.R
 import com.mk.recyclerviewtask.data.model.post.Post
@@ -46,6 +45,16 @@ class PostFragment : MvpAppCompatFragment(R.layout.fragment_post), PostView {
     }
 
     override fun displayPosts(post: List<Post>) {
+        binding.progresBar.visibility = View.GONE
         adapter.setPosts(post)
+    }
+
+    override fun onLoadingPost() {
+        binding.progresBar.visibility = View.VISIBLE
+    }
+
+
+    override fun onFailurePost(throwable: Throwable) {
+
     }
 }
