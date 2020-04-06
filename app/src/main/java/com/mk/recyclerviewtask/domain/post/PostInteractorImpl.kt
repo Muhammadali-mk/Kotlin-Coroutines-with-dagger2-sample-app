@@ -1,7 +1,6 @@
 package com.mk.recyclerviewtask.domain.post
 
 import com.mk.recyclerviewtask.data.model.post.Post
-import com.mk.recyclerviewtask.data.model.post.PostResponse
 import com.mk.recyclerviewtask.data.repository.post.PostRepository
 import com.mk.recyclerviewtask.utils.flatMapResult
 import kotlinx.coroutines.Dispatchers

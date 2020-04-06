@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import com.mk.recyclerviewtask.data.model.post.PostEntity
 
 @Database(entities = [PostEntity::class], exportSchema = false, version = 1)
- abstract class PostDatabase : RoomDatabase() {
+abstract class PostDatabase : RoomDatabase() {
 
     internal abstract fun postEntityDao(): PostEntityDao
 

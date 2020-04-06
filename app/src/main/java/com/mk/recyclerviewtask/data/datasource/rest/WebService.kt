@@ -11,7 +11,7 @@ interface WebService {
     suspend fun getPosts(): List<PostResponse>
 
     @GET("/posts/{id}")
-     suspend fun getPostById(@Path(value = "id") postId: Int): PostResponse
+    suspend fun getPostById(@Path(value = "id") postId: Int): PostResponse
 
     @GET("/photos")
     suspend fun getPhotos(): List<Photo>

@@ -2,10 +2,6 @@ package com.mk.recyclerviewtask.presentation.features.details.di
 
 import com.mk.recyclerviewtask.data.repository.details.DetailsRepository
 import com.mk.recyclerviewtask.data.repository.details.DetailsRepositoryImpl
-import com.mk.recyclerviewtask.data.repository.post.PostRepository
-import com.mk.recyclerviewtask.data.repository.post.PostRepositoryImpl
-import com.mk.recyclerviewtask.domain.post.PostInteractor
-import com.mk.recyclerviewtask.domain.post.PostInteractorImpl
 import com.mk.recyclerviewtask.domain.post.details.DetailsInteractor
 import com.mk.recyclerviewtask.domain.post.details.DetailsInteractorImpl
 import dagger.Binds
