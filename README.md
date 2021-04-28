@@ -1,5 +1,5 @@
 MVP pattern  is a way of separating responsibilities in application code.
-Capabilities
+**Capabilities**
 Moxy has a few killer features in other ways:
 
 Presenter stay alive when Activity recreated(it simplify work with multithreading)
